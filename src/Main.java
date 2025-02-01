@@ -19,6 +19,9 @@ public class Main {
 
         ArrayList<String> tokens = ie.tokenize(expression);
 
+        //pass tokenized expression to shunting yard algorithm
+        System.out.println(ie.shuntingYardAlg(tokens));
+
         System.out.println(tokens);
 
     }
