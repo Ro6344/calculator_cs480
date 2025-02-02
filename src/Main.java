@@ -1,8 +1,6 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Scanner;
+
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         //ask user for input
@@ -15,14 +13,22 @@ public class Main {
         String expression = keyboard.nextLine();
 
         //tokenize expression
-        interpretExpression ie = new interpretExpression();
-
+        InterpretExpression ie = new InterpretExpression();
+        Operations op = new Operations();
         ArrayList<String> tokens = ie.tokenize(expression);
 
-        //pass tokenized expression to shunting yard algorithm
-        System.out.println(ie.shuntingYardAlg(tokens));
+        //pass tokenized expression to Shunting Yard algorithm to convert to postfix
+        ArrayList<String> postfixTokens = ie.shuntingYardAlg(tokens);
 
-        System.out.println(tokens);
+        //print the postfix expression for debugging
+        System.out.println("Postfix Expression: " + postfixTokens);
 
+        //calculate the result using postfix evaluation
+        double result = op.evaluatePostfix(postfixTokens);
+
+        //print the final result
+        if (!Double.isNaN(result)) {
+            System.out.println("Result: " + result);
+        }
     }
 }
